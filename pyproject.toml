@@ -1,0 +1,37 @@
+[project]
+name = "MesonTest"
+authors = [
+    { name = "moi15moi", email = "moi15moismokerlolilol@gmail.com" },
+]
+license = "MIT"
+requires-python = ">=3.10"
+classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Typing :: Typed",
+]
+dynamic = ["version"]
+
+[build-system]
+requires = ["meson @ git+https://github.com/mesonbuild/meson.git", "meson-python"]
+build-backend = "mesonpy"
+
+[tool.meson-python]
+limited-api = true
+
+[tool.meson-python.args]
+# From https://mesonbuild.com/meson-python/how-to-guides/shared-libraries.html#static-library-from-subproject
+setup = [
+  "--default-library=static",
+  "--wrap-mode=forcefallback",
+]
+install = ['--skip-subprojects']
+
+[tool.pytest.ini_options]
+addopts = "--ignore=subprojects/"
