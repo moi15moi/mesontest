@@ -9,7 +9,8 @@ project(
 cc = meson.get_compiler('cpp')
 py = import('python').find_installation(pure: false)
 
-nanobind_dep = dependency('nanobind')
+nanobind_proj = subproject('nanobind')
+nanobind_dep = nanobind_proj.get_variable('nanobind_dep')
 
 if py.language_version().version_compare('>=3.12')
     message('limited_api is activated')
