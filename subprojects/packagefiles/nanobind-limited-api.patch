@@ -1,0 +1,29 @@
+--- a/meson.build
++++ b/meson.build
+@@ -5,7 +5,7 @@
+     'src/version.py',
+     check: true,
+   ).stdout().split('\n')[0].strip(),
+-  meson_version: '>=0.63.0',
++  meson_version: '>=1.12.99',
+   default_options: [
+     'cpp_std=c++17',
+     'b_ndebug=if-release',
+@@ -15,7 +15,7 @@
+ )
+ 
+ py_mod = import('python')
+-py = py_mod.find_installation()
++py = py_mod.find_installation(limited_api: get_option('limited_api'))
+ py_dep = py.dependency()
+ 
+ robin_map_dep = dependency(
+--- /dev/null
++++ b/meson.options
+@@ -0,0 +1,6 @@
++option(
++  'limited_api',
++  type: 'string',
++  value: '',
++  description: 'Python Limited API version to target (e.g. 3.12), empty to disable',
++)
