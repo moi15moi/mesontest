@@ -11,3 +11,4 @@ venv/
 # Meson
 /subprojects/*
 !/subprojects/*.wrap
+!/subprojects/packagefiles/

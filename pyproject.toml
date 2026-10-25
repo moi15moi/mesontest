@@ -19,7 +19,7 @@ classifiers=[
 dynamic = ["version"]
 
 [build-system]
-requires = ["meson @ git+https://github.com/mesonbuild/meson.git", "meson-python"]
+requires = ["meson @ https://github.com/lgarrison/meson/archive/refs/heads/python-limited-api.zip", "meson-python"]
 build-backend = "mesonpy"
 
 [tool.meson-python]

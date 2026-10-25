@@ -1,11 +1,12 @@
 project(
     'MesonTest',
-    'c',
-    default_options: ['buildtype=release', 'python.allow_limited_api=false'],
-    meson_version: '>=1.3.0',
+    'cpp',
+    default_options: ['cpp_std=c++17', 'buildtype=release', 'python.allow_limited_api=false'],
+    meson_version: '>=1.12.99',
     version: '0.2.1',
 )
 
+cc = meson.get_compiler('cpp')
 py = import('python').find_installation(pure: false)
 
 if py.language_version().version_compare('>=3.12')
@@ -16,9 +17,12 @@ else
     limited_api_args = {}
 endif
 
+nanobind_dep = dependency('nanobind', default_options: limited_api_args)
+
 py.extension_module(
     'my_module',
-    'my_module.c',
+    'my_module.cpp',
     install: true,
+    dependencies : [nanobind_dep],
     kwargs: limited_api_args
 )
